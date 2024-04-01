@@ -12,17 +12,15 @@ class Task extends Model
     protected $fillable = [
         'title',
         'description',
-        'assigned_by_id',
-        'assigned_to_id',
+        'assign_by_id',
+        'assign_to_id',
     ];
 
-    public function assigned_by(){
-
-        return $this->user->where;
+    public function admin(){
+        return   $this->belongsTo(User::class, 'assign_to_id');
     }
 
-    public function assigned_to(){
-
-        return $this->user;
+    public function user(){
+        return   $this->belongsTo(User::class, 'assign_by_id');
     }
 }

@@ -49,6 +49,14 @@ class User extends Authenticatable
     {
         return $query->where('name', 'like', '%' . $filter . '%');
     }
+
+    public function tasks(){
+        return $this->hasMany(Task::class, "assign_to_id");
+    }
+    public function getTasksCountAttribute()
+    {
+        return $this->tasks?->count() ?? 0;
+    }
 }
 
 

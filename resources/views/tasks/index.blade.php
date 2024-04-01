@@ -45,10 +45,10 @@
                                 {{ $task->description }}
                             </td>
                             <td>
-                                {{ $task->user->assign_by }}
+                                {{ $task->admin->name }}
                             </td>
                             <td>
-                                {{ $task->user->assign_to }}
+                                {{ $task->user->name }}
                             </td>
                             <td>
                                 {{ $task->created_at }}

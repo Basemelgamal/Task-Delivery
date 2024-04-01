@@ -53,7 +53,8 @@ class TaskController extends Controller
      */
     public function store(TaskRequest $request)
     {
-        //
+        $this->taskRepository->store($request->validated());
+        return redirect()->route('tasks.index')->with(['success' => 'Added Successfully']);
     }
 
     /**
@@ -69,11 +70,14 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
+        $adminRole = Role::where('name', 'admin')->first();
+        $userRole = Role::where('name', 'user')->first();
+
         $input = [
-            'admins' => User::admins()
+            'admins' => $adminRole->users
                 ->pluck('name', 'id'),
-            'users' => User::users()
-            ->pluck('name', 'id'),
+            'users' => $userRole->users
+                ->pluck('name', 'id'),
             'task'  => $task,
             'method'  => 'PUT',
             'action'  => route('tasks.update', $task->id),
@@ -87,7 +91,8 @@ class TaskController extends Controller
      */
     public function update(TaskRequest $request, Task $task)
     {
-        //
+        $this->taskRepository->update($task, $request->validated());
+        return redirect()->route('tasks.index')->with(['success' => 'Updated Successfully']);
     }
 
     /**
@@ -95,6 +100,7 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        $this->taskRepository->destroy($task);
+        return redirect()->route('tasks.index')->with(['success' => 'Deleted Successfully']);
     }
 }

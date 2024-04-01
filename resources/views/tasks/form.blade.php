@@ -9,7 +9,7 @@
             @if($method == 'POST')
                 {!! Form::open(['url' => $action, 'method' => $method, 'enctype'=>'multipart/form-data', 'files' => true]) !!}
             @elseif ($method == 'PUT')
-                {!! Form::model($country, ['url' => [$action], 'method'=>$method , 'enctype'=>'multipart/form-data', 'files' => true]) !!}
+                {!! Form::model($task, ['url' => [$action], 'method'=>$method , 'enctype'=>'multipart/form-data', 'files' => true]) !!}
             @endif
             <div class="card-body">
 
